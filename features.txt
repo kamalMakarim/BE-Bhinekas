@@ -1,0 +1,3 @@
+- login paralel
+- id pake nanoid
+- gk selalu password dikirm saat memerlukan sebuah user

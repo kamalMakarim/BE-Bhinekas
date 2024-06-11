@@ -20,7 +20,8 @@
 ## Introduction
 
 This documentation covers the backend API routes for the project. The API is built using Express.js and provides routes for managing users, chat logs, logs, students, teachers, and parents.
-
+## Table Diagram
+![alt text](image.png)
 ## Routes
 
 ### Admin Routes

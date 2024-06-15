@@ -41,7 +41,7 @@ const connectWithRetry = () => {
     .catch((error) => {
       logger.error("Error connecting to the database:", error);
       logger.info("Retrying connection in 5 seconds...");
-      setTimeout(connectWithRetry, 5000); // retry after 5 seconds
+      setTimeout(connectWithRetry, 5000); 
     });
 };
 

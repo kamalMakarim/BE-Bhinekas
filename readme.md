@@ -1,5 +1,6 @@
 # Backend API Documentation
-
+Backend untuk sekolah bukom (buku kominikasi) sekolah bhinekas. Bukom sendiri berfungsi untuk menghubungkan orang tua dan guru mengenai kegiatan anak di dalam sekolah. Berikut link untuk frontend
+https://github.com/kamalMakarim/FE-Bhinekas
 ## Table of Contents
 - [Introduction](#introduction)
 - [Routes](#routes)

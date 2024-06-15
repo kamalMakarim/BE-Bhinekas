@@ -41,11 +41,49 @@ exports.postLog = async (req, res) => {
       [class_id]
     );
     log[0].kelas = new Kelas(kelas[0].id, kelas[0].name, kelas[0].year);
-    log[0].created_at = new Date(log[0].created_at.getTime() + 7 * 60 * 60 * 1000);
+    log[0].created_at = new Date(
+      log[0].created_at.getTime() + 7 * 60 * 60 * 1000
+    );
     log[0].created_at = formatTimestamp(log[0].created_at);
-    res.status(201).send({ message: "Log created", payload: log[0]});
+    res.status(201).send({ message: "Log created", payload: log[0] });
   } catch (error) {
     console.log(error);
+    res.status(500).send(error.message);
+  }
+};
+
+exports.deleteLog = async (req, res) => {
+  const { id } = req.query;
+  try {
+    const { rows: log } = await neonPool.query(
+      `DELETE FROM logs WHERE id = $1 RETURNING *`,
+      [id]
+    );
+    res.status(200).send({ message: "Log deleted", payload: log[0] });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+exports.updateLog = async (req, res) => {
+  const { id } = req.query;
+  const { message, class_id ,for_special_kids } = req.body;
+  try {
+    const { rows: log } = await neonPool.query(
+      `UPDATE logs SET message = $1, class_id = $2, for_special_kids = $3 WHERE id = $4 RETURNING *`,
+      [message, class_id, for_special_kids, id]
+    );
+    const { rows: kelas } = await neonPool.query(
+      `SELECT * FROM classes WHERE id = $1`,
+      [class_id]
+    );
+    log[0].kelas = new Kelas(kelas[0].id, kelas[0].name, kelas[0].year);
+    log[0].created_at = new Date(
+      log[0].created_at.getTime() + 7 * 60 * 60 * 1000
+    );
+    log[0].created_at = formatTimestamp(log[0].created_at);
+    res.status(200).send({ message: "Log updated", payload: log[0] });
+  } catch (error) {
     res.status(500).send(error.message);
   }
 };

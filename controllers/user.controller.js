@@ -116,3 +116,24 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.logins = async (req, res) => {
+  const { username, password } = req.body;
+  if (username == "user" && password == "password") {
+    res
+      .status(200)
+      .send({
+        message: "Login success",
+        payload: { role: "user", username: "user", password: "password" },
+      });
+  } else if (username == "admin" && password == "password") {
+    res
+      .status(200)
+      .send({
+        message: "Login success",
+        payload: { role: "admin", username: "admin", password: "password" },
+      });
+  } else {
+    res.status(400).send({ message: "Invalid username or password" });
+  }
+};
